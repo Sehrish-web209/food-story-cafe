@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import MenuCard from '@/components/menu/MenuCard';
 import OrderDrawer from '@/components/menu/OrderDrawer';
 import type { MenuItem } from '@/components/menu/MenuCard';
@@ -141,23 +142,41 @@ export default function MenuPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fcf9f3] pt-28 pb-16">
-      {/* Hero */}
-      <section className="mx-auto max-w-7xl px-6 lg:px-16">
-        <div className="mb-8">
-          <span className="text-[11px] font-bold uppercase tracking-widest text-[#9f3c16]">
-            Curated Selection & All-Day Kitchen
-          </span>
+    <div className="min-h-screen bg-[#fcf9f3] pt-4 pb-16">
 
-          <h1 className="mt-2 font-serif text-4xl font-bold tracking-tight text-[#1c1c18] sm:text-5xl">
-            Food & Beverage Menu
-          </h1>
+{/* Hero */}
+<section className="px-6">
+  <div className="mx-auto flex max-w-5xl flex-col items-center justify-between py-4 md:flex-row md:py-6">
 
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-[#57423b] sm:text-base">
-            Comfort bites, cold sips, artisan coffee, and sweet moments
-            crafted fresh daily along Talagang Highway.
-          </p>
-        </div>
+    {/* Left Side - Text */}
+    <div className="max-w-md">
+      <span className="text-[11px] font-bold uppercase tracking-widest text-[#9f3c16]">
+        Curated Selection & All-Day Kitchen
+      </span>
+
+      <h1 className="mt-2 font-serif text-4xl font-bold tracking-tight text-[#1c1c18] sm:text-5xl">
+        Food & Beverage Menu
+      </h1>
+
+      <p className="mt-3 text-sm leading-6 text-[#57423b] sm:text-base">
+        Comfort bites, cold sips, artisan coffee, and sweet moments
+        crafted fresh daily along Talagang Highway.
+      </p>
+    </div>
+
+    {/* Right Side - Featured Food Story Image */}
+    <div className="hidden h-[210px] w-full md:block md:w-[360px]">
+      <Image
+        src="/menu-hero-item.jpeg"
+        alt="Featured Food & Beverage"
+        width={400}
+        height={260}
+        className="h-[210px] w-full object-cover rounded-2xl shadow-sm border border-[#9E3B1C]/10"
+        priority
+      />
+    </div>
+
+  </div>
 
 {/* Category Filters */}
 <div className="mb-12 flex w-full items-center gap-2">
