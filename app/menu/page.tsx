@@ -225,7 +225,7 @@ export default function MenuPage() {
     </p>
   ) : activeCategory === 'All' ? (
     <>
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mb-6 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
         {menuItems.slice(0, visibleItems).map((item) => (
           <MenuCard
             key={item.id}
@@ -236,7 +236,7 @@ export default function MenuPage() {
       </div>
 
       {menuItems.length > 15 && (
-        <div className="mt-10 flex justify-center">
+        <div className="my-6 flex justify-center">
           <button
             type="button"
             onClick={() =>
@@ -276,7 +276,7 @@ export default function MenuPage() {
             </div>
 
             <div
-              className={`grid grid-cols-1 gap-5 ${cat.cols}`}
+              className={`mb-6 grid grid-cols-1 gap-5 ${cat.cols}`}
             >
               {categoryItems
                 .slice(0, visibleCategoryItems)
@@ -290,7 +290,7 @@ export default function MenuPage() {
             </div>
 
             {categoryItems.length > 5 && (
-              <div className="mt-8 flex justify-center">
+             <div className="my-6 flex justify-center">
                 <button
                   type="button"
                   onClick={() =>
