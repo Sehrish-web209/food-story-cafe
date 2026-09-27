@@ -3,7 +3,7 @@ import React from 'react';
 export interface MenuItem {
   id: string;
   name: string;
-  price: number;
+  price: number | null;
   description: string;
   category: string;
   tag?: string;
@@ -27,7 +27,7 @@ export default function MenuCard({
           </h3>
 
           <span className="text-lg font-semibold text-[#9f3c16] whitespace-nowrap">
-            PKR {item.price}
+            {item.price !== null ? `PKR ${item.price}` : 'Price unavailable'}
           </span>
         </div>
 
@@ -45,13 +45,19 @@ export default function MenuCard({
           <span />
         )}
 
-        <button
-          type="button"
-          onClick={() => onAddToOrder(item)}
-          className="text-[#9f3c16] font-semibold text-[14px] hover:text-[#7d2d10] active:scale-95 transition-all flex items-center gap-1 group-hover:translate-x-0.5 duration-200"
-        >
-          Add to Order +
-        </button>
+        {item.price !== null ? (
+          <button
+            type="button"
+            onClick={() => onAddToOrder(item)}
+            className="text-[#9f3c16] font-semibold text-[14px] hover:text-[#7d2d10] active:scale-95 transition-all flex items-center gap-1 group-hover:translate-x-0.5 duration-200"
+          >
+            Add to Order +
+          </button>
+        ) : (
+          <span className="text-xs text-[#57423b]">
+            Price unavailable
+          </span>
+        )}
       </div>
     </article>
   );

@@ -17,7 +17,12 @@ export default function OrderDrawer({
   items,
   onClose,
 }: OrderDrawerProps) {
-  const total = items.reduce(
+  const pricedItems = items.filter(
+    (orderItem): orderItem is OrderItem & { item: MenuItem & { price: number } } =>
+      orderItem.item.price !== null
+  );
+
+  const total = pricedItems.reduce(
     (sum, orderItem) =>
       sum + orderItem.item.price * orderItem.quantity,
     0
@@ -29,7 +34,7 @@ export default function OrderDrawer({
 
   const whatsappMessage = [
     'Hi Food Story Café, I would like to order:',
-    ...items.map(
+    ...pricedItems.map(
       ({ item, quantity }) =>
         `- ${quantity}x ${item.name} (PKR ${
           item.price * quantity
@@ -70,7 +75,7 @@ export default function OrderDrawer({
 
       {/* Order Items */}
       <div className="space-y-2 max-h-48 overflow-y-auto mb-3 text-sm text-[#1c1c18]">
-        {items.map(({ item, quantity }) => (
+        {pricedItems.map(({ item, quantity }) => (
           <div
             key={item.id}
             className="flex items-center justify-between gap-3"
@@ -102,7 +107,7 @@ export default function OrderDrawer({
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="block w-full text-center bg-[#9f3c16] text-white font-semibold py-3 rounded-full hover:bg-[#31312d] transition-all"
+        className="block w-full text-center bg-[#9f3c16] text-white font-semibold py-3 rounded-full hover:bg-[#7A2F18] transition-all"
       >
         Send Order via WhatsApp
       </a>

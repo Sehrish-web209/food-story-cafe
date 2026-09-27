@@ -1,171 +1,115 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import MenuCard from '@/components/menu/MenuCard';
 import OrderDrawer from '@/components/menu/OrderDrawer';
 import type { MenuItem } from '@/components/menu/MenuCard';
 import type { OrderItem } from '@/components/menu/OrderDrawer';
 
-const menuItems: MenuItem[] = [
-  {
-    id: 'espresso',
-    name: 'Double-shot Espresso',
-    price: 350,
-    description:
-      'Rich, concentrated extraction with thick golden crema from premium freshly roasted Arabica beans.',
-    category: 'Hot Coffee',
-    tag: 'Hot Seller',
-  },
-  {
-    id: 'vanilla-latte',
-    name: 'Vanilla Latte',
-    price: 540,
-    description:
-      'Freshly extracted double espresso balanced with steamed milk and delicate French Madagascar vanilla syrup.',
-    category: 'Hot Coffee',
-    tag: 'Bestseller',
-  },
-  {
-    id: 'cappuccino',
-    name: 'Cappuccino',
-    price: 480,
-    description:
-      'Classic Italian espresso with velvety microfoam and a dusting of premium organic cocoa.',
-    category: 'Hot Coffee',
-    tag: 'Traditional',
-  },
-  {
-    id: 'mochaccino',
-    name: 'Mochaccino',
-    price: 580,
-    description:
-      'Rich dark chocolate mocha blended seamlessly with double-shot espresso and textured steamed milk.',
-    category: 'Hot Coffee',
-    tag: 'Chocolate Infused',
-  },
-  {
-    id: 'cold-frappe',
-    name: 'Cold Frappe',
-    price: 620,
-    description:
-      'Ice-blended espresso whip with fresh cream, a hint of cocoa, and finely crushed ice.',
-    category: 'Cold Sips & Frappes',
-    tag: 'Resident Chill',
-  },
-  {
-    id: 'iced-mocha',
-    name: 'Iced Mocha',
-    price: 590,
-    description:
-      'Chilled espresso, dark chocolate syrup, and cold farm milk poured generously over crystal clear ice.',
-    category: 'Cold Sips & Frappes',
-    tag: 'Refreshing',
-  },
-  {
-    id: 'lotus-frappe',
-    name: 'Lotus Frappe',
-    price: 680,
-    description:
-      'Blended ice-coffee with Lotus Biscoff spread and crushed cookies crumble crown.',
-    category: 'Cold Sips & Frappes',
-    tag: 'Customer Favorite',
-  },
-  {
-    id: 'special-shake',
-    name: 'FoodStory Special Shake',
-    price: 690,
-    description:
-      'The cafe’s house-crafted blending, daily gelato, roasted crunch, and velvety ribbons of caramel chocolate.',
-    category: 'Signature Shakes',
-    tag: 'Signature',
-  },
-  {
-    id: 'belgian-chocolate',
-    name: 'Belgian Chocolate Velvet',
-    price: 650,
-    description:
-      'Thick imported Belgian dark chocolate blended with cold milk gelato and whipped cream topping.',
-    category: 'Signature Shakes',
-    tag: 'Rich Sweet',
-  },
-  {
-    id: 'strawberry-shake',
-    name: 'Strawberry Cream Indulgence',
-    price: 620,
-    description:
-      'Fresh ripe strawberries churned with sweet cream and vanilla bean gelato.',
-    category: 'Signature Shakes',
-    tag: 'Fruity',
-  },
-  {
-    id: 'chicken-panini',
-    name: 'Grilled Chicken Panini',
-    price: 820,
-    description:
-      'Tender marinated grilled chicken breast, mozzarella melt, bell peppers, and signature house herb aioli on hot-pressed bread. Served with crisp fries.',
-    category: 'Paninis & Sandwiches',
-    tag: 'Includes Fries',
-  },
-  {
-    id: 'club-sandwich',
-    name: 'Highway Club Sandwich',
-    price: 790,
-    description:
-      'Triple-decker toasted sourdough with smoked chicken, farm-fresh egg, cheddar cheese, and grilled bacon.',
-    category: 'Paninis & Sandwiches',
-    tag: 'Classic',
-  },
-  {
-    id: 'roast-beef-sub',
-    name: 'Artisanal Roast Beef Sub',
-    price: 890,
-    description:
-      'Slow-roasted sliced beef tenderloin loaded in a toasted artisanal baguette with caramelized onions and melted provolone.',
-    category: 'Paninis & Sandwiches',
-    tag: 'Chef Special',
-  },
-  {
-    id: 'molten-lava',
-    name: 'Molten Lava Warm Center',
-    price: 750,
-    description:
-      'Rich Belgian dark cacao cake baked to order with an authentic erupting hot chocolate center, paired with a chilled dairy scoop.',
-    category: 'Desserts & Patisserie',
-    tag: 'Baked Fresh',
-  },
-  {
-    id: 'lotus-cheese',
-    name: 'Lotus Cheese Slice',
-    price: 680,
-    description:
-      'Velvety Philadelphia style cream cheese base infused with Belgian Biscoff spread on a buttery caramelized crumb base.',
-    category: 'Desserts & Patisserie',
-    tag: 'Bestseller',
-  },
-  {
-    id: 'tiramisu',
-    name: 'Classic Tiramisu',
-    price: 650,
-    description:
-      'Savoiardi ladyfingers soaked in dark espresso and liqueur, layered with rich mascarpone zabaglione.',
-    category: 'Desserts & Patisserie',
-    tag: 'Italian Classic',
-  },
-];
-
 const categoryConfig = [
-  { name: 'Hot Coffee', subTag: 'ARTISAN BREWS', cols: 'md:grid-cols-2' },
-  { name: 'Cold Sips & Frappes', subTag: 'ICED REFRESHMENTS', cols: 'md:grid-cols-2' },
-  { name: 'Signature Shakes', subTag: 'INDULGENT BLENDS', cols: 'md:grid-cols-3' },
-  { name: 'Paninis & Sandwiches', subTag: 'HEARTY BITES', cols: 'md:grid-cols-3' },
-  { name: 'Desserts & Patisserie', subTag: 'SWEET MOMENTS', cols: 'md:grid-cols-3' },
+  { name: 'Coffee', subTag: 'ARTISAN BREWS', cols: 'md:grid-cols-2' },
+  { name: 'Cold Coffee', subTag: 'ICED REFRESHMENTS', cols: 'md:grid-cols-2' },
+  { name: 'Ice Tea', subTag: 'ICED REFRESHMENTS', cols: 'md:grid-cols-2' },
+  { name: 'Smoothies', subTag: 'FRESH BLENDS', cols: 'md:grid-cols-2' },
+  {
+    name: 'Cold Beverages & Lemonade',
+    subTag: 'REFRESHING SIPS',
+    cols: 'md:grid-cols-2',
+  },
+  {
+    name: 'Ice Creams & Desserts',
+    subTag: 'SWEET MOMENTS',
+    cols: 'md:grid-cols-3',
+  },
+  {
+    name: 'Fresh Milk Shakes',
+    subTag: 'INDULGENT BLENDS',
+    cols: 'md:grid-cols-3',
+  },
+  {
+    name: 'Fresh Juices',
+    subTag: 'FRESH & NATURAL',
+    cols: 'md:grid-cols-2',
+  },
+  {
+    name: 'Delicacies',
+    subTag: 'SWEET MOMENTS',
+    cols: 'md:grid-cols-3',
+  },
+  {
+    name: 'Cakes',
+    subTag: 'SWEET MOMENTS',
+    cols: 'md:grid-cols-3',
+  },
+  {
+    name: 'Mini Cakes',
+    subTag: 'SWEET MOMENTS',
+    cols: 'md:grid-cols-3',
+  },
+  {
+    name: 'Savoury',
+    subTag: 'HEARTY BITES',
+    cols: 'md:grid-cols-3',
+  },
+  {
+    name: 'Pizza / Food Story',
+    subTag: 'FOOD STORY SPECIALS',
+    cols: 'md:grid-cols-3',
+  },
+  {
+    name: 'Others',
+    subTag: 'MORE TO ENJOY',
+    cols: 'md:grid-cols-3',
+  },
 ];
 
 export default function MenuPage() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+  const [visibleItems, setVisibleItems] = useState(15);
+  const [visibleCategoryItems, setVisibleCategoryItems] = useState(5);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchMenu = async () => {
+      try {
+        const response = await fetch('/api/menu');
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch menu');
+        }
+
+        const data: MenuItem[] = await response.json();
+        setMenuItems(data);
+      } catch (error) {
+        console.error('Failed to load menu:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMenu();
+  }, []);
+
+    const categoryScrollRef = useRef<HTMLDivElement>(null);
+    const scrollCategories = (direction: 'left' | 'right') => {
+    categoryScrollRef.current?.scrollBy({
+      left: direction === 'left' ? -220 : 220,
+      behavior: 'smooth',
+    });
+  };
+
+  const handleCategoryChange = (category: string) => {
+    setActiveCategory(category);
+    setVisibleCategoryItems(5);
+  };
 
   const handleAddToOrder = (item: MenuItem) => {
+    if (item.price === null) {
+      return;
+    }
+
     setOrderItems((currentItems) => {
       const existingItem = currentItems.find(
         (orderItem) => orderItem.item.id === item.id
@@ -215,75 +159,160 @@ export default function MenuPage() {
           </p>
         </div>
 
-        {/* Category Filters */}
-        <div className="mb-12 flex gap-2 overflow-x-auto pb-2">
+{/* Category Filters */}
+<div className="mb-12 flex w-full items-center gap-2">
+  {/* Left Arrow */}
+  <button
+    type="button"
+    onClick={() => scrollCategories('left')}
+    aria-label="Scroll categories left"
+    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-stone-700 shadow-sm transition-all hover:bg-stone-100"
+  >
+    ‹
+  </button>
+
+  {/* Scrollable Categories */}
+  <div
+    ref={categoryScrollRef}
+    className="flex min-w-0 flex-1 items-center gap-2 overflow-x-auto px-3 pb-2 scrollbar-none"
+  >
+    <button
+      type="button"
+      onClick={() => handleCategoryChange('All')}
+      className={`whitespace-nowrap rounded-full px-5 py-2.5 text-xs font-bold uppercase tracking-wider transition-all ${
+        activeCategory === 'All'
+          ? 'bg-[#9f3c16] text-white'
+          : 'bg-[#f0eee8] text-[#57423b] hover:bg-[#ebe8e2]'
+      }`}
+    >
+      Full Menu
+    </button>
+
+    {categoryConfig.map((cat) => (
+      <button
+        key={cat.name}
+        type="button"
+        onClick={() => handleCategoryChange(cat.name)}
+        className={`whitespace-nowrap rounded-full px-5 py-2.5 text-xs font-bold uppercase tracking-wider transition-all ${
+          activeCategory === cat.name
+            ? 'bg-[#9f3c16] text-white'
+            : 'bg-[#f0eee8] text-[#57423b] hover:bg-[#ebe8e2]'
+        }`}
+      >
+        {cat.name}
+      </button>
+    ))}
+  </div>
+
+  {/* Right Arrow */}
+  <button
+    type="button"
+    onClick={() => scrollCategories('right')}
+    aria-label="Scroll categories right"
+    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-stone-700 shadow-sm transition-all hover:bg-stone-100"
+  >
+    ›
+  </button>
+</div>
+
+</section>
+
+{/* Menu Sections */}
+<main className="mx-auto max-w-7xl px-6 lg:px-16">
+  {loading ? (
+    <p className="py-10 text-center text-sm text-[#57423b]">
+      Loading menu...
+    </p>
+  ) : activeCategory === 'All' ? (
+    <>
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {menuItems.slice(0, visibleItems).map((item) => (
+          <MenuCard
+            key={item.id}
+            item={item}
+            onAddToOrder={handleAddToOrder}
+          />
+        ))}
+      </div>
+
+      {menuItems.length > 15 && (
+        <div className="mt-10 flex justify-center">
           <button
             type="button"
-            onClick={() => setActiveCategory('All')}
-            className={`whitespace-nowrap rounded-full px-5 py-2.5 text-xs font-bold uppercase tracking-wider transition-all ${
-              activeCategory === 'All'
-                ? 'bg-[#9f3c16] text-white'
-                : 'bg-[#f0eee8] text-[#57423b] hover:bg-[#ebe8e2]'
-            }`}
+            onClick={() =>
+              setVisibleItems(
+                visibleItems >= menuItems.length
+                  ? 15
+                  : menuItems.length
+              )
+            }
+            className="rounded-full bg-[#9f3c16] px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-[#7A2F18]"
           >
-            Full Menu
+            {visibleItems >= menuItems.length
+              ? 'View Less'
+              : 'View More'}
           </button>
-
-          {categoryConfig.map((cat) => (
-            <button
-              key={cat.name}
-              type="button"
-              onClick={() => setActiveCategory(cat.name)}
-              className={`whitespace-nowrap rounded-full px-5 py-2.5 text-xs font-bold uppercase tracking-wider transition-all ${
-                activeCategory === cat.name
-                  ? 'bg-[#9f3c16] text-white'
-                  : 'bg-[#f0eee8] text-[#57423b] hover:bg-[#ebe8e2]'
-              }`}
-            >
-              {cat.name}
-            </button>
-          ))}
         </div>
-      </section>
+      )}
+    </>
+  ) : (
+    categoryConfig
+      .filter((cat) => cat.name === activeCategory)
+      .map((cat) => {
+        const categoryItems = menuItems.filter(
+          (item) => item.category === cat.name
+        );
 
-      {/* Menu Sections */}
-      <main className="mx-auto max-w-7xl px-6 lg:px-16">
-        {categoryConfig
-          .filter(
-            (cat) =>
-              activeCategory === 'All' ||
-              activeCategory === cat.name
-          )
-          .map((cat) => {
-            const categoryItems = menuItems.filter(
-              (item) => item.category === cat.name
-            );
+        return (
+          <section key={cat.name} className="mb-12">
+            <div className="mb-5 flex items-baseline justify-between border-b border-[#e5e2dc] pb-2">
+              <h2 className="font-serif text-3xl font-bold text-[#1c1c18]">
+                {cat.name}
+              </h2>
 
-            return (
-              <section key={cat.name} className="mb-12">
-                <div className="mb-5 flex items-baseline justify-between border-b border-[#e5e2dc] pb-2">
-                  <h2 className="font-serif text-3xl font-bold text-[#1c1c18]">
-                    {cat.name}
-                  </h2>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[#57423b]">
+                {cat.subTag}
+              </span>
+            </div>
 
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#57423b]">
-                    {cat.subTag}
-                  </span>
-                </div>
+            <div
+              className={`grid grid-cols-1 gap-5 ${cat.cols}`}
+            >
+              {categoryItems
+                .slice(0, visibleCategoryItems)
+                .map((item) => (
+                  <MenuCard
+                    key={item.id}
+                    item={item}
+                    onAddToOrder={handleAddToOrder}
+                  />
+                ))}
+            </div>
 
-                <div className={`grid grid-cols-1 gap-5 ${cat.cols}`}>
-                  {categoryItems.map((item) => (
-                    <MenuCard
-                      key={item.id}
-                      item={item}
-                      onAddToOrder={handleAddToOrder}
-                    />
-                  ))}
-                </div>
-              </section>
-            );
-          })}
-      </main>
+            {categoryItems.length > 5 && (
+              <div className="mt-8 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setVisibleCategoryItems(
+                      visibleCategoryItems >= categoryItems.length
+                        ? 5
+                        : categoryItems.length
+                    )
+                  }
+                  className="rounded-full bg-[#9f3c16] px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-[#7A2F18]"
+                >
+                  {visibleCategoryItems >= categoryItems.length
+                    ? 'View Less'
+                    : 'View More'}
+                </button>
+              </div>
+            )}
+          </section>
+        );
+      })
+  )}
+</main>
 
       {/* Highway Takeaway Banner */}
       <section className="mx-auto mb-8 w-full max-w-7xl px-6 lg:px-16">
@@ -305,7 +334,7 @@ export default function MenuPage() {
 
           <a
             href="tel:03185600123"
-            className="w-full rounded-full bg-[#9f3c16] px-6 py-3.5 text-center text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-[#1c1c18] sm:w-auto"
+            className="w-full rounded-full bg-[#9f3c16] px-6 py-3.5 text-center text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-[#7A2F18] sm:w-auto"
           >
             Call for Takeaway: 0318 5600123
           </a>
