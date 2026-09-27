@@ -165,13 +165,13 @@ export default function MenuPage() {
     </div>
 
     {/* Right Side - Featured Food Story Image */}
-    <div className="hidden h-[210px] w-full md:block md:w-[360px]">
+    <div className="hidden h-52.5 w-full md:block md:w-90">
       <Image
         src="/menu-hero-item.jpeg"
         alt="Featured Food & Beverage"
         width={400}
         height={260}
-        className="h-[210px] w-full object-cover rounded-2xl shadow-sm border border-[#9E3B1C]/10"
+        className="h-52.5 w-full object-cover rounded-2xl shadow-sm border border-[#9E3B1C]/10"
         priority
       />
     </div>
