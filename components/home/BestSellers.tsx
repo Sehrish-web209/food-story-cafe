@@ -127,16 +127,12 @@ export default function BestSellers() {
   }, []);
 
   return (
-    <section className="border-t border-stone-200/80 bg-[#F6F4EF] py-20">
+   <section className="bg-[#F6F4EF] py-12 md:py-16">
       <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-12">
 
         {/* Section Divider */}
-        <div className="mb-12 flex items-center justify-center gap-3 text-xs font-semibold uppercase tracking-wider text-[#9E3B1C]">
-          <span className="h-px flex-1 bg-stone-300/60" />
-
-          <span>✦ Curated House Favorites</span>
-
-          <span className="h-px flex-1 bg-stone-300/60" />
+        <div className="mb-8 text-center text-xs font-semibold uppercase tracking-wider text-[#9E3B1C]">
+          ✦ Curated House Favorites
         </div>
 
         {/* Section Heading */}

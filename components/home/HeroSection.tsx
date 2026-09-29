@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function HeroSection() {
   return (
     <section className="bg-[#F6F4EF]">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 py-16 md:px-10 lg:grid-cols-2 lg:px-12 lg:py-24">
+     <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 py-12 md:px-10 md:py-16 lg:grid-cols-2 lg:px-12">
 
         {/* Left Content */}
         <div className="max-w-2xl">
@@ -44,7 +44,7 @@ export default function HeroSection() {
           </div>
 
           {/* Quick Stats */}
-          <div className="mt-10 grid grid-cols-1 gap-5 border-t border-[#D9D3CB] pt-6 sm:grid-cols-3">
+         <div className="mt-10 grid grid-cols-1 gap-5 pt-6 sm:grid-cols-3">
 
             {/* Location */}
             <div>

@@ -26,14 +26,12 @@ const experiences = [
 
 export default function ExperienceSection() {
   return (
-    <section className="border-t border-stone-200/80 bg-[#F6F4EF] py-24 md:py-28">
+  <section className="bg-[#EFECE6] py-12 md:py-16">
       <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-12">
         
         {/* Section Heading */}
-        <div className="mb-12 flex items-center justify-center gap-3 text-xs font-medium uppercase tracking-[0.2em] text-[#9E3B1C]">
-            <span className="h-px flex-1 bg-stone-300/60" />
-            <span>✦ A Well-Rounded Café Experience</span>
-            <span className="h-px flex-1 bg-stone-300/60" />
+        <div className="mb-8 text-center text-xs font-medium uppercase tracking-[0.2em] text-[#9E3B1C]">
+          ✦ A Well-Rounded Café Experience
         </div>
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="mt-4 font-serif text-3xl text-stone-900 md:text-4xl">
