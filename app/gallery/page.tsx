@@ -33,10 +33,16 @@ export default function GalleryPage() {
     fetchGallery();
   }, []);
 
-  const filteredItems =
+  const visibleGalleryItems = galleryItems.filter(
+  (item) => item.title !== "Cheesecake Slice"
+);
+
+const filteredItems =
   activeCategory === "ALL MOMENTS"
-    ? galleryItems
-    : galleryItems.filter((item) => item.category === activeCategory);
+    ? visibleGalleryItems
+    : visibleGalleryItems.filter(
+        (item) => item.category === activeCategory
+      );
 
   return (
     <main className="min-h-screen bg-[#F7F2EC] pt-8 pb-16">
