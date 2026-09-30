@@ -61,9 +61,9 @@ export default function AtmosphereSection() {
         const data: ReviewsData = await response.json();
 
         // Featured review: Rafey Minhas
-        const featuredReview = data.reviews.find(
-          (item) => item.id === 2
-        );
+       const featuredReview = data.reviews.find(
+        (item) => item.id === 4
+      );
 
         setReview(featuredReview ?? null);
       } catch (error) {
@@ -151,7 +151,7 @@ export default function AtmosphereSection() {
 
               {/* Featured Guest Review */}
               {review && (
-                <article className="cursor-pointer rounded-2xl border border-black/5 bg-[#F6F4EF] p-4 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-md">
+                <article className="min-h-45 cursor-pointer rounded-2xl border border-black/5 bg-[#F6F4EF] p-4 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-md">
 
                   {/* Category */}
                   <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#9E3B1C]">
@@ -173,7 +173,7 @@ export default function AtmosphereSection() {
                   </div>
 
                   {/* Review */}
-                  <blockquote className="mt-2 line-clamp-2 text-xs leading-5 text-gray-600">
+                  <blockquote className="mt-2 line-clamp-4 text-xs leading-5 text-gray-600">
                     “{review.reviewText}”
                   </blockquote>
 
