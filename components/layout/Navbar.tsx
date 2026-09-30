@@ -1,4 +1,6 @@
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
 import Link from 'next/link';
 
 const navLinks = [
@@ -11,6 +13,7 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
   <header className="sticky top-0 z-50 bg-[#F7F2EC] backdrop-blur-md shadow-sm border-b border-[#9E3B1C]/10">
       <div className="max-w-360 mx-auto h-20 px-6 lg:px-16 flex items-center justify-between">
@@ -52,12 +55,41 @@ export default function Navbar() {
 
           <Link
             href="/contact"
-            className="inline-flex items-center border border-[#1c1c18] text-[#1c1c18] text-[11px] font-bold uppercase tracking-wider px-3.5 py-2 rounded-lg hover:bg-[#9e3b1c] hover:text-white transition-all"
+            className="hidden md:inline-flex items-center border border-[#1c1c18] text-[#1c1c18] text-[11px] font-bold uppercase tracking-wider px-3.5 py-2 rounded-lg hover:bg-[#9e3b1c] hover:text-white transition-all"
           >
             <span>Reserve</span>
           </Link>
         </div>
+        {/* Mobile Menu Button */}
+        <button
+          type="button"
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="inline-flex items-center justify-center rounded-lg border border-[#1c1c18]/20 p-2 text-[#1c1c18] md:hidden"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+        >
+          <span className="text-xl leading-none">
+            {menuOpen ? "✕" : "☰"}
+          </span>
+        </button>
       </div>
+            {/* Mobile Navigation */}
+      {menuOpen && (
+        <nav className="border-t border-[#9E3B1C]/10 bg-[#F7F2EC] px-6 py-4 md:hidden">
+          <div className="flex flex-col">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className="border-b border-[#9E3B1C]/10 py-3 text-sm font-medium text-[#57423b] last:border-b-0"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </nav>
+      )}
     </header>
   );
 }
