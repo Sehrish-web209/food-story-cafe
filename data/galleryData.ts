@@ -104,5 +104,13 @@ export const galleryItems: GalleryItem[] = [
     description:
       "Warm night lawn ambience perfect for family gatherings.",
   },
+  {
+  id: 10,
+  title: "Cheesecake Slice",
+  category: "FOOD & DESSERTS",
+  tag: "DESSERT",
+  image: "/gallery/Cheesecake slice.jpeg",
+  description: "A freshly served cheesecake slice from Food Story.",
+},
 ];
 
