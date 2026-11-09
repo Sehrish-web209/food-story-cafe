@@ -95,11 +95,10 @@ export default function BestSellers() {
         }
 
         const data: MenuItem[] = await response.json();
-
         const selectedItems: DisplayItem[] = featuredItems
           .map((featured) => {
             const menuItem = data.find(
-              (item) => item.id === featured.id
+              (item) => String(item.id) === String(featured.id)
             );
 
             if (!menuItem) {
@@ -116,7 +115,6 @@ export default function BestSellers() {
             };
           })
           .filter((item): item is DisplayItem => item !== null);
-
         setItems(selectedItems);
       } catch (error) {
         console.error("Error fetching menu:", error);
