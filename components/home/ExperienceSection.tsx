@@ -5,7 +5,7 @@ const experiences = [
     title: "Good Food",
     description:
       "Enjoy freshly prepared meals, hearty bites, and delicious favorites made for every kind of craving.",
-    image: "/gallery/pizzas.jpeg",
+    image: "/gallery/Pizzas.jpeg",
     alt: "Fresh pizzas served at Food Story Cafe",
   },
   {
