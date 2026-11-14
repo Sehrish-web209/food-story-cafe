@@ -1,6 +1,8 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+import { FaWhatsapp } from "react-icons/fa";
+import { FiPhoneCall, FiNavigation } from "react-icons/fi";
 
 interface BusinessData {
   name: string;
@@ -189,52 +191,62 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* QUICK ACTIONS */}
-              <div className="grid grid-cols-1 gap-2 border-t border-[#e5e2dc] pt-4 sm:grid-cols-3">
-                <a
-                  href={`tel:${phone}`}
-                  className="group flex flex-col items-center justify-center gap-1 rounded-lg border border-[#dec0b7] bg-[#f0eee8] p-3 text-[#1c1c18] transition-all hover:-translate-y-0.5 hover:bg-[#9f3c16] hover:text-white"
-                >
-                  <span className="text-lg text-[#9f3c16] group-hover:text-white">
-                    ☎
-                  </span>
+            {/* QUICK ACTIONS */}
+            <div className="grid grid-cols-1 gap-2 border-t border-[#e5e2dc] pt-4 sm:grid-cols-3">
 
-                  <span className="text-[10px] font-bold uppercase tracking-wider">
-                    Call Now
-                  </span>
-                </a>
+              {/* CALL NOW */}
+              <a
+                href={`tel:${phone}`}
+                className="group flex flex-col items-center justify-center gap-2 rounded-lg border border-[#dec0b7] bg-[#f0eee8] p-3 text-[#1c1c18] transition-all hover:-translate-y-0.5 hover:bg-[#9f3c16] hover:text-white"
+              >
+                <FiPhoneCall
+                  className="h-6 w-6 text-[#9f3c16] transition-colors group-hover:text-white"
+                  aria-hidden="true"
+                />
 
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex flex-col items-center justify-center gap-1 rounded-lg border border-[#dec0b7] bg-[#f0eee8] p-3 text-[#1c1c18] transition-all hover:-translate-y-0.5 hover:bg-[#9f3c16] hover:text-white"
-                >
-                  <span className="text-lg text-[#9f3c16] group-hover:text-white">
-                    ◉
-                  </span>
+                <span className="text-[10px] font-bold uppercase tracking-wider">
+                  Call Now
+                </span>
+              </a>
 
-                  <span className="text-[10px] font-bold uppercase tracking-wider">
-                    WhatsApp
-                  </span>
-                </a>
+              {/* WHATSAPP */}
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Contact Food Story on WhatsApp"
+                className="group flex flex-col items-center justify-center gap-2 rounded-lg border border-[#dec0b7] bg-[#f0eee8] p-3 text-[#1c1c18] transition-all hover:-translate-y-0.5 hover:bg-[#9f3c16] hover:text-white"
+              >
+                <FaWhatsapp
+                  className="h-7 w-7 text-[#25D366] transition-colors group-hover:text-white"
+                  aria-hidden="true"
+                />
 
-                <a
-                  href={directionsLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex flex-col items-center justify-center gap-1 rounded-lg border border-[#dec0b7] bg-[#f0eee8] p-3 text-[#1c1c18] transition-all hover:-translate-y-0.5 hover:bg-[#9f3c16] hover:text-white"
-                >
-                  <span className="text-lg text-[#9f3c16] group-hover:text-white">
-                    ↗
-                  </span>
+                <span className="text-[10px] font-bold uppercase tracking-wider">
+                  WhatsApp
+                </span>
+              </a>
 
-                  <span className="text-[10px] font-bold uppercase tracking-wider">
-                    Directions
-                  </span>
-                </a>
-              </div>
+              {/* DIRECTIONS */}
+              <a
+                href={directionsLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col items-center justify-center gap-2 rounded-lg border border-[#dec0b7] bg-[#f0eee8] p-3 text-[#1c1c18] transition-all hover:-translate-y-0.5 hover:bg-[#9f3c16] hover:text-white"
+              >
+                <FiNavigation
+                  className="h-6 w-6 text-[#9f3c16] transition-colors group-hover:text-white"
+                  aria-hidden="true"
+                />
+
+                <span className="text-[10px] font-bold uppercase tracking-wider">
+                  Directions
+                </span>
+              </a>
+
             </div>
+            </div>
+
 
             {/* INQUIRY FORM */}
             <div
@@ -346,22 +358,29 @@ export default function ContactPage() {
             id="map-section"
             className="flex flex-col lg:col-span-7"
           >
+            
             {/* MAP CONTAINER */}
-            <div className="relative h-85 w-full overflow-hidden rounded-2xl border border-black/5 bg-[#ebe8e2] shadow-sm md:h-90">
-              <iframe
-                src={mapUrl}
-                title="Food Story Café location on Google Maps"
-                className="h-full w-full border-0"
-                style={{
-                  filter:
-                    "sepia(15%) contrast(92%) brightness(98%) saturate(85%)",
-                }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+            <div className="relative w-full">
+
+              {/* GOOGLE MAP */}
+              <div className="relative h-75 w-full overflow-hidden rounded-2xl border border-black/5 bg-[#ebe8e2] shadow-sm md:h-90">
+                <iframe
+                  src={mapUrl}
+                  title="Food Story Café location on Google Maps"
+                  className="h-full w-full border-0"
+                  style={{
+                    filter:
+                      "sepia(15%) contrast(92%) brightness(98%) saturate(85%)",
+                  }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
 
               {/* MAP OVERLAY */}
-              <div className="absolute bottom-4 left-4 right-4 z-10 rounded-xl border border-black/5 bg-white/95 p-5 shadow-md backdrop-blur-md transition-all hover:-translate-y-0.5 md:right-auto md:max-w-md">
+              <div className="relative mt-4 z-10 w-full rounded-xl border border-black/5 bg-white/95 p-5 shadow-md backdrop-blur-md transition-all hover:-translate-y-0.5 lg:absolute lg:bottom-4 lg:left-4 lg:right-auto lg:mt-0 lg:max-w-md">
+    
+            
                 <div className="flex items-center gap-2">
                   <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-[#9f3c16]" />
 
